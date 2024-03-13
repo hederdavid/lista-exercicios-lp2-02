@@ -1,17 +1,108 @@
 package exercicio01;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.sql.SQLOutput;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+import static java.lang.Thread.sleep;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+        int opcao = 0;
+        Cronometro[] cronometros = new Cronometro[10];
+        int indice = 0;
+        do {
+            System.out.println("---------------------------------------");
+            System.out.println("GERENCIADOR DE CRONÔMETROS");
+            System.out.println("---------------------------------------");
+            System.out.println("Selecione uma opção: ");
+            System.out.println("1. Criar novo cronômetro");
+            System.out.println("2. Consultar cronômetro");
+            System.out.println("3. Consultar todos os cronômetros");
+            System.out.println("4. Sair");
+            System.out.print("Opção escolhida: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1 -> {
+                    cronometros[indice] = new Cronometro(false);
+                    cronometros[indice].start();
+                    System.out.println("Cronometro iniciado com sucesso.");
+                    indice++;
+                }
+                case 2 -> {
+                    indice = 1;
+                    int opcaoCronometro = 0;
+
+                    System.out.println("Selecione o cronômetro: ");
+                    if (cronometros[0] == null) {
+                        System.out.println("Nenhum cronômetro disponível, crie um antes de consultar.");
+                        sleep(2000);
+                    } else {
+                        for (int i = 0; i < cronometros.length; i++) {
+                            if (cronometros[i] != null) {
+                                System.out.println("Cronômetro " + indice);
+                                indice++;
+                            } else {
+                                break;
+                            }
+                        }
+                        boolean isValorCorreto = false;
+                        do {
+                            try {
+
+
+                                System.out.print("Cronômetro escolhido: ");
+                                opcaoCronometro = scanner.nextInt();
+                                if (opcaoCronometro == 1) {
+                                    System.out.println("Contagem atual: " + cronometros[0].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 2) {
+                                    System.out.println("Contagem atual: " + cronometros[1].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 3) {
+                                    System.out.println("Contagem atual: " + cronometros[2].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 4) {
+                                    System.out.println("Contagem atual: " + cronometros[3].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 5) {
+                                    System.out.println("Contagem atual: " + cronometros[4].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 6) {
+                                    System.out.println("Contagem atual: " + cronometros[5].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 7) {
+                                    System.out.println("Contagem atual: " + cronometros[6].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 8) {
+                                    System.out.println("Contagem atual: " + cronometros[7].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 9) {
+                                    System.out.println("Contagem atual: " + cronometros[8].getContador() + " segundos");
+                                    isValorCorreto = true;
+                                } else if (opcaoCronometro == 10) {
+                                    System.out.println("Contagem atual: " + cronometros[9].getContador());
+                                    isValorCorreto = true;
+                                }
+                            } catch (NullPointerException e) {
+                                System.out.println("O cronometro inserido não existe!");
+                            }
+                        } while (!isValorCorreto);
+                    }
+                }
+                case 3 -> {
+                    indice = 1;
+                    for (Cronometro cronometro : cronometros) {
+                        if (cronometro != null) {
+                            System.out.println("Cronômetro " + indice + ": " + cronometro.getContador() + " segundos.");
+                            indice++;
+                        }
+                    }
+                }
+            }
+
+        } while (opcao != 4);
+
     }
 }
