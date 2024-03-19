@@ -16,27 +16,20 @@ public class RelogioThreadUtil extends Relogio implements Runnable {
     @Override
     public void run() {
         double porcentagem = 0;
-
-        while (getHora() != this.horaFinal || getMinuto() != this.minutoFinal || getSegundo() != this.segundoFinal) {
-            porcentagem = (getHora() * 24 * 60 + getMinuto() * 60 + getSegundo()) * 100;
+        double tempoFinalEmSegundos = horaFinal * 24 * 60 + minutoFinal * 60 + segundoFinal;
+        double tempoAtualEmSegundos = 0;
+        for (int i = 0; tempoAtualEmSegundos <= tempoFinalEmSegundos; i++) {
+            porcentagem = tempoAtualEmSegundos * 100;
+            tempoAtualEmSegundos++;
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            porcentagem /= (horaFinal * 24 * 60 + minutoFinal * 60 + segundoFinal);
+            porcentagem /= tempoFinalEmSegundos;
             System.out.println(toString() + " | " + String.format("%.2f", porcentagem) + "%");
             addSegundo();
         }
-        porcentagem = (getHora() * 24 * 60 + getMinuto() * 60 + getSegundo()) * 100;
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        porcentagem /= (horaFinal * 24 * 60 + minutoFinal * 60 + segundoFinal);
-        System.out.println(toString() + " | " + String.format("%.2f", porcentagem) + "%");
         System.out.println("Tempo finalizado.");
-
     }
 }
