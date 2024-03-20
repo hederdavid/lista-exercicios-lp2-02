@@ -25,17 +25,34 @@ public class Main {
         }
 
         long menorTempo = arrayPalindromos[0].getTempoExecucao();
-        int gerador = 1;
+        int geradorMenorTempo = 1;
         if (menorTempo > arrayPalindromos[1].getTempoExecucao()) {
             menorTempo = arrayPalindromos[1].getTempoExecucao();
-            gerador = 2;
+            geradorMenorTempo = 2;
         }
-        if (arrayPalindromos[0].getTempoExecucao() > arrayPalindromos[2].getTempoExecucao()) {
+        if (menorTempo > arrayPalindromos[2].getTempoExecucao()) {
             menorTempo = arrayPalindromos[0].getTempoExecucao();
-            gerador = 3;
+            geradorMenorTempo = 3;
         }
 
-        System.out.println("Gerador com menor tempo de processamento: " + gerador);
+        long maiorTempo = arrayPalindromos[0].getTempoExecucao();
+        int geradorMaiorTempo = 1;
+        if (maiorTempo < arrayPalindromos[1].getTempoExecucao()) {
+            maiorTempo = arrayPalindromos[1].getTempoExecucao();
+            geradorMaiorTempo = 2;
+        }
+        if (maiorTempo < arrayPalindromos[2].getTempoExecucao()) {
+            maiorTempo = arrayPalindromos[2].getTempoExecucao();
+            geradorMaiorTempo = 3;
+        }
+
+        double porcentagemAcima = ((double) (arrayPalindromos[geradorMaiorTempo - 1].getTempoExecucao()
+                - arrayPalindromos[geradorMenorTempo - 1].getTempoExecucao()) /
+                arrayPalindromos[geradorMenorTempo - 1].getTempoExecucao() * 100);
+
+        System.out.println("Gerador com menor tempo de processamento: " + geradorMenorTempo);
+        System.out.println("Gerador com maior tempo de processamento: " + geradorMaiorTempo + "" +
+                " Aproximadamente <" + String.format("%.2f", porcentagemAcima) + "% acima>" );
 
 
     }
