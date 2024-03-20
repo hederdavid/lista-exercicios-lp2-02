@@ -1,12 +1,12 @@
 package exercicio08;
 
 public class Palindromos extends Thread {
-    private int quantidadePalindromos;
+    private final int QUANTIDADEPALINDROMOS;
     private String resultado = "";
     private long tempoExecucao;
 
     public Palindromos(int quantidadePalindromos) {
-        this.quantidadePalindromos = quantidadePalindromos;
+        this.QUANTIDADEPALINDROMOS = quantidadePalindromos;
     }
 
     public void run() {
@@ -23,7 +23,7 @@ public class Palindromos extends Thread {
                 resultado += i + " ";
                 quantidadePalindromosAchados++;
             }
-            if (quantidadePalindromosAchados == quantidadePalindromos) {
+            if (quantidadePalindromosAchados == QUANTIDADEPALINDROMOS) {
                 isQuantidadePalindromosCorreta = true;
             }
             possivelPalindromo = "";
@@ -33,7 +33,7 @@ public class Palindromos extends Thread {
     }
 
     public void getResultado() {
-        System.out.println("Aqui estão " + quantidadePalindromos + " palindromos: " + resultado);
+        System.out.println("Aqui estão " + QUANTIDADEPALINDROMOS + " palindromos: " + resultado);
         System.out.println("Tempo de execução: " + tempoExecucao + " nanosegundos.");
     }
 
